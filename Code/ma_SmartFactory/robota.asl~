@@ -4,6 +4,7 @@
 /* Initial goals */
 //!at(robota,machine).
 //!testgoal.
+!deliverto(machine, 0, 11,10).
 
 /* Plans */
 +!testgoal : true <- !at(robota,stock);
@@ -19,4 +20,5 @@
 				
 +!deliverto(Deliverpoint, Otype, Oquant, OID) : true <- 
 											!at(robota, Deliverpoint);
-											deliver_payload(Deliverpoint, Otype, Oquant, OID).
+											deliver_payload(Deliverpoint, Otype, Oquant, OID);
+											.print(" ********* Reached Stock").

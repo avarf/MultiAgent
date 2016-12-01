@@ -13,6 +13,6 @@ traystockInventory(1000).
 
 +!deliver_tray_machine(Oquant, OID) : true <-
 								.send(robota, achieve, at(robotb, traystock)); //must be changed to robotb
-								.deliver_tray_robot(Oquant);
+								deliver_tray_robot(Oquant);
 								.send(robota, achieve, deliverto(machine, -1, Oquant, OID)).
 
