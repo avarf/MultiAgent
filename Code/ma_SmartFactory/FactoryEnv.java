@@ -51,6 +51,10 @@ public class FactoryEnv extends Environment {
           addPercept("robota", delivery);
         }
         
+        if (lRobotA.equals(model.lAMachine)) {
+            addPercept("robota", machine);
+          }
+        
         //logger.info("***** Robota Percept After Update ******"+getPercepts(ag));
         //robotLocation();
         
@@ -156,6 +160,9 @@ public class FactoryEnv extends Environment {
 			logger.info("******** assembel_bearingboxes TEST INFO: " + result);
 			logger.info("******** assembel_bearingboxes TEST INFO: "+model.assembledBearingBox);
 			
+		} else if(afunctor.equals("clearb")) {
+	        clearPercepts(ag);
+	        return true;
 		} else {
 			logger.info("INSIDE LAST ELSE _ Failed to execute action "+action);
 		}

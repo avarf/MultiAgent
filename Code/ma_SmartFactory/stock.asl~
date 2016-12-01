@@ -16,8 +16,6 @@ stockInventory(100).
 
 +!order(Deliverpoint, Otype, Oquant, OID) : stockInventory(N) > Oquant <-
 								.send(robota, achieve, at(robota, stock));
-								.print("sdhjhdjh");
-								.deliver_item_robot(Oquant);
-								.send(robota, achieve, at(robota, delivery)).
-								//.send(robota, achieve, deliverto(Deliverpoint, Otype, Oquant, OID)).
+								deliver_item_robot(Oquant);
+								.send(robota, achieve, deliverto(Deliverpoint, Otype, Oquant, OID)).
 								

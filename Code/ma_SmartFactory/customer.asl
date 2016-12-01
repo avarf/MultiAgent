@@ -2,7 +2,7 @@
 /* Initial beliefs and rules */
 
 /* Initial goals */
-//!start.
+!start.
 
 /* Plans */
 // we use 0 for bearing and 1 for assembeled bearings

@@ -3,7 +3,7 @@
 traystockInventory(1000).
 
 /* Initial goals */
-!testgoal.
+//!testgoal.
 
 /* Plans */
 +!testgoal : true <- deliver_tray_robot(15).
