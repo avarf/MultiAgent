@@ -21,8 +21,10 @@ public class FactoryView extends GridWorldView {
     /** draw application objects */
     @Override
     public void draw(Graphics g, int x, int y, int object) {
-        Location lRobot = hmodel.getAgPos(0);
-        // Location lRobot2 = hmodel.getAgPos(1);
+    	int agg = 0;
+        //Location lRobot = hmodel.getAgPos(0);
+    	Location lRobot = hmodel.getAgPos(agg);
+    	
         super.drawAgent(g, x, y, Color.lightGray, -1);
         switch (object) {
         	case FactoryModel.ASSEMBLYMACHINE:
@@ -59,15 +61,15 @@ public class FactoryView extends GridWorldView {
 
     @Override
     public void drawAgent(Graphics g, int x, int y, Color c, int id) {
-        Location lRobot = hmodel.getAgPos(0);
-        // Location lRobot = hmodel.getAgPos(1);
+        int agg = 0;
+    	//Location lRobot = hmodel.getAgPos(0);
+        Location lRobot = hmodel.getAgPos(agg);
         
         if (!lRobot.equals(hmodel.lAMachine) && !lRobot.equals(hmodel.lStock)) {
             c = Color.yellow;
-            if (hmodel.carryingBeer) c = Color.orange;
             super.drawAgent(g, x, y, c, -1);
             g.setColor(Color.black);
-            super.drawString(g, x, y, defaultFont, "Robot");
+            //super.drawString(g, x, y, defaultFont, "Robot");
         }
     }
 }

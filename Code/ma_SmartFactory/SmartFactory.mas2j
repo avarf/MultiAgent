@@ -4,12 +4,10 @@
 
 */
 
-MAS domestic_robot {
+MAS smart_factory {
     infrastructure: Centralised
     environment: FactoryEnv(gui) // use "nogui" as parameter to not show the GUI
-    agents: //robot;
-            //owner;
-            //supermarket;
+    agents: 
         customer;
 
         machine;
@@ -26,9 +24,7 @@ MAS domestic_robot {
 
         robotb;
 
-        //newrobot1;
-
-        //newrobot2;
+        delivery;
 
 }
 

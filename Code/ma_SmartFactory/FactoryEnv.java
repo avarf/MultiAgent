@@ -3,7 +3,6 @@ import jason.environment.Environment;
 import jason.environment.grid.Location;
 import java.util.logging.Logger;
 
-//import com.sun.java.util.jar.pack.ConstantPool.LiteralEntry;
 
 public class FactoryEnv extends Environment {
 
@@ -57,9 +56,6 @@ public class FactoryEnv extends Environment {
         
         //logger.info("***** Robota Percept After Update ******"+getPercepts(ag));
         //robotLocation();
-        
-
-    	
     }
     
 
@@ -92,8 +88,6 @@ public class FactoryEnv extends Environment {
         	
         	try {
                 result = model.moveTowards(dest);
-                //logger.info("***** Robota Percept "+getPercepts(ag));
-                //addPercept("robota", as);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -109,10 +103,6 @@ public class FactoryEnv extends Environment {
 			} catch (Exception e) {
 				logger.info("Failed to execute action "+action);
 			}
-//			String delivpoint = action.getTerm(0).toString();
-//			ordtyp = (int)((NumberTerm)action.getTerm(1)).solve();
-//			ordquant = (int)((NumberTerm)action.getTerm(2)).solve();
-//			ordID = (int)((NumberTerm)action.getTerm(3)).solve();
 			result = model.deliverPayload(pos, ordtyp, ordquant, ordID);
 			logger.info("******** deliver_payload TEST INFO(Just for deliverying to machine): " 
 					+ model.machineBInventory );
@@ -123,19 +113,14 @@ public class FactoryEnv extends Environment {
 				result = model.deliverItemtoRobot(ordquant);
 				logger.info("******** deliver_item_robot TEST INFO: "+model.cargoQuantity);
 			} catch (Exception e) {
-				//logger.info("Failed to execute action "+action);
 				logger.info("********exception: "+e);
 			}
-			//ordquant = (int)((NumberTerm)action.getTerm(0)).solve();
-			//result = model.deliverItemtoRobot(ordquant);
-					
 		} else if (afunctor.equals("deliver_tray_robot")) {
 			try {
 				ordquant = (int)((NumberTerm)action.getTerm(0)).solve();
 			} catch (Exception e) {
 				logger.info("Failed to execute action "+action);
 			}
-			//ordquant = (int)((NumberTerm)action.getTerm(0)).solve();
 			result = model.deliverTraytoRobot(ordquant);
 			logger.info("******** deliver_tray_robot TEST INFO: "+model.cargoTrayQuantity);
 			
@@ -145,7 +130,6 @@ public class FactoryEnv extends Environment {
 			} catch (Exception e) {
 				logger.info("Failed to execute action "+action);
 			}
-			//ordquant = (int)((NumberTerm)action.getTerm(0)).solve();
 			result = model.addBearingtStock(ordquant);
 			logger.info("******** add_bearingt_stock TEST INFO: "+model.stockInventory);
 			
@@ -155,7 +139,7 @@ public class FactoryEnv extends Environment {
 			} catch (Exception e) {
 				logger.info("Failed to execute action "+action);
 			}
-			//ordquant = (int)((NumberTerm)action.getTerm(0)).solve();
+			
 			result = model.assembleBearingBoxes(ordquant);
 			logger.info("******** assembel_bearingboxes TEST INFO: " + result);
 			logger.info("******** assembel_bearingboxes TEST INFO: "+model.assembledBearingBox);
@@ -174,33 +158,6 @@ public class FactoryEnv extends Environment {
         return result;
 		
     }
-
-//    
-//    // get the robot location and adds it to its percepts
-//    public void robotLocation(){
-//        // get the robot location
-//        Location lRobotA = model.getAgPos(0);
-//
-//        logger.info("***** Inside robotlocation ******** ");
-//        Literal amachine = Literal.parseLiteral("at(robota,macine)");
-//        if (lRobotA.equals(model.lAMachine)) {
-//            addPercept("robota", amachine);
-//            return ;
-//        }if (lRobotA.equals(model.lStock)) {
-//            //addPercept("robota", Literal.parseLiteral("at(robota,stock)"));
-//            addPercept("robota", atstock);
-//        	return ;
-//        }if (lRobotA.equals(model.lDelivery)) {
-//            addPercept("robota", Literal.parseLiteral("at(robota,delivery)"));
-//            return ;
-//        }if (lRobotA.equals(model.lTrayStock)) {
-//            addPercept("robota", Literal.parseLiteral("at(robota,traystock)"));
-//            return ;
-//        } else {
-//        	addPercept("robota", hello);
-//        }
-//        
-//    }
     
     
 }
