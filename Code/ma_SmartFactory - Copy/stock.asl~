@@ -14,11 +14,11 @@ stockInventory(100).
 								!order(Otype, Oquant, OID).
 
 +!order(Deliverpoint, Otype, Oquant, OID) : stockInventory(N) > Oquant <-
-								.send(robota, achieve, at(robota, stock));
+								.send(robota1, achieve, at(robota1, stock));
 								!robotpos;
 								deliver_item_robot(Oquant);
 								+stockInventory((N - Oquant));
-								.send(robota, achieve, deliverto(Deliverpoint, Otype, Oquant, OID)).
+								.send(robota1, achieve, deliverto(Deliverpoint, Otype, Oquant, OID)).
 				
-+!robotpos : at(robota,stock) <- true.
-+!robotpos : not at(robota,stock) <- !robotpos.
++!robotpos : at(robota1,stock) <- true.
++!robotpos : not at(robota1,stock) <- !robotpos.

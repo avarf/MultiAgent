@@ -9,10 +9,17 @@ public class FactoryEnv extends Environment {
     // common literals
 
 	
-	public static final Literal stock = Literal.parseLiteral("at(robota, stock)");
-	public static final Literal delivery = Literal.parseLiteral("at(robota,delivery)");
-	public static final Literal machine = Literal.parseLiteral("at(robota,machine)");
-	public static final Literal traystock = Literal.parseLiteral("at(robota,traystock)");
+	public static final Literal stock1 = Literal.parseLiteral("at(robota1, stock)");
+	public static final Literal stock2 = Literal.parseLiteral("at(robota2, stock)");
+	
+	public static final Literal delivery1 = Literal.parseLiteral("at(robota1,delivery)");
+	public static final Literal delivery2 = Literal.parseLiteral("at(robota2,delivery)");
+	
+	public static final Literal machine1 = Literal.parseLiteral("at(robota1,machine)");
+	public static final Literal machine2 = Literal.parseLiteral("at(robota2,machine)");
+	
+	public static final Literal traystock1 = Literal.parseLiteral("at(robota1,traystock)");
+	public static final Literal traystock2 = Literal.parseLiteral("at(robota2,traystock)");
 	
     int flag = 0;
     static Logger logger = Logger.getLogger(FactoryEnv.class.getName());
@@ -32,7 +39,48 @@ public class FactoryEnv extends Environment {
     }
     
     /** creates the agents percepts based on the FactoryModel */
-    void updatePercepts(String ag) {
+    void updatePercepts(String ag){
+    	//logger.info("---Inside update and agent is:  "+ag);
+    	if(ag.equals("robota1")){
+    		clearPercepts("robota1");
+    		Location lRobot = model.getAgPos(0);
+    		
+    		if(lRobot.equals(model.lStock)){
+    			addPercept("robota1", stock1);
+    			//logger.info("*****Inside ag.EQUAL and lRObot is:  "+stock1);
+    		}
+    		
+    		if(lRobot.equals(model.lDelivery)){
+    			addPercept("robota1", delivery1);
+    		}
+    		
+    		if(lRobot.equals(model.lAMachine)){
+    			addPercept("robota1", machine1);
+    		}
+    	}else if (ag.equals("robota2")) {
+			clearPercepts("robota2");
+			Location lRobot = model.getAgPos(1);
+			
+    		if(lRobot.equals(model.lStock)){
+    			addPercept("robota2", stock2);
+    		}
+    		
+    		if(lRobot.equals(model.lDelivery)){
+    			addPercept("robota2", delivery2);
+    		}
+    		
+    		if(lRobot.equals(model.lAMachine)){
+    			addPercept("robota2", machine2);
+    		}
+    		
+    		if (lRobot.equals(model.lTrayStock)) {
+				addPercept("robota2", traystock2);
+			}
+		}
+    }
+    
+    /** creates the agents percepts based on the FactoryModel */
+    void updatePercepts2(String ag) {
         
     	// clear the percepts of the agents
         clearPercepts("robota");
@@ -43,15 +91,15 @@ public class FactoryEnv extends Environment {
     	
         Location lRobotA = model.getAgPos(0);
         if (lRobotA.equals(model.lStock)) {
-          addPercept("robota", stock);
+//          addPercept("robota", stock);
           }
         
         if (lRobotA.equals(model.lDelivery)) {
-          addPercept("robota", delivery);
+          addPercept("robota", delivery1);
         }
         
         if (lRobotA.equals(model.lAMachine)) {
-            addPercept("robota", machine);
+            addPercept("robota", machine1);
           }
         
         //logger.info("***** Robota Percept After Update ******"+getPercepts(ag));
@@ -87,7 +135,7 @@ public class FactoryEnv extends Environment {
         	}
         	
         	try {
-                result = model.moveTowards(dest);
+                result = model.moveTowards(ag, dest);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -105,7 +153,7 @@ public class FactoryEnv extends Environment {
 			}
 			result = model.deliverPayload(pos, ordtyp, ordquant, ordID);
 			logger.info("******** deliver_payload TEST INFO(Just for deliverying to machine): " 
-					+ model.machineBInventory );
+					+ model.machineBInventory+result );
 			
 		} else if (afunctor.equals("deliver_item_robot")) {
 			try {
@@ -122,7 +170,7 @@ public class FactoryEnv extends Environment {
 				logger.info("Failed to execute action "+action);
 			}
 			result = model.deliverTraytoRobot(ordquant);
-			logger.info("******** deliver_tray_robot TEST INFO: "+model.cargoTrayQuantity);
+			logger.info("******** deliver_tray_robot TEST INFO: "+model.cargoTrayQuantity+result);
 			
 		} else if (afunctor.equals("add_bearingt_stock")) {
 			try {
@@ -152,6 +200,7 @@ public class FactoryEnv extends Environment {
 		}
         
         if(result){
+        	//logger.info("Result is true "+result);
         	updatePercepts(ag); // DO WE REALLY NEED THIS ???
         	try { Thread.sleep(500); } catch (Exception e) {}
         }
