@@ -91,7 +91,6 @@ public class FactoryModel extends GridWorldModel {
     }
     
     boolean deliverItemtoRobot(int ordquant){
-    	//!carryingItem
     	if(!carryingItem){
     		carryingItem = true;
     		cargoQuantity = ordquant;
@@ -104,13 +103,6 @@ public class FactoryModel extends GridWorldModel {
     boolean deliverTraytoRobot(int ordquant){
     	cargoTrayQuantity = ordquant;
 		return true;
-//    	if(!carryingTray){
-//    		carryingTray = true;
-//    		cargoTrayQuantity = ordquant;
-//    		return true;
-//    	} else {
-//			return false;
-//		}
     }
     
     // add new bearings to stock inventory - after ordering bearings to other providers
@@ -153,37 +145,5 @@ public class FactoryModel extends GridWorldModel {
         }
         return true;
     }
-    
-    public int[] getr1() {
-    	Location rL = getAgPos(0);
-    	int[] r1 = {rL.x, rL.y};
-    	return r1;
-    }
-    
-    public int[] getr2() {
-    	Location rL = getAgPos(1);
-    	int[] r2 = {rL.x, rL.y};
-    	return r2;
-    }
-    
-    boolean moveTowards2(Location dest) {
-        Location r1 = getAgPos(0);
-    	//Location r1 = getAgPos(1);
-        if (r1.x < dest.x)        r1.x++;
-        else if (r1.x > dest.x)   r1.x--;
-        if (r1.y < dest.y)        r1.y++;
-        else if (r1.y > dest.y)   r1.y--;
-        setAgPos(0, r1); // move the robot in the grid
         
-        // repaint the grid and whole environment
-        if (view != null) {
-            view.update(lAMachine.x, lAMachine.y);
-        	view.update(lStock.x, lStock.y);
-        	view.update(lTrayStock.x, lTrayStock.y);
-        	view.update(lDelivery.x, lDelivery.y);
-        	
-        }
-        return true;
-    }
-    
 }

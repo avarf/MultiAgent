@@ -47,7 +47,6 @@ public class FactoryEnv extends Environment {
     		
     		if(lRobot.equals(model.lStock)){
     			addPercept("robota1", stock1);
-    			//logger.info("*****Inside ag.EQUAL and lRObot is:  "+stock1);
     		}
     		
     		if(lRobot.equals(model.lDelivery)){
@@ -77,35 +76,7 @@ public class FactoryEnv extends Environment {
 				addPercept("robota2", traystock2);
 			}
 		}
-    }
-    
-    /** creates the agents percepts based on the FactoryModel */
-    void updatePercepts2(String ag) {
-        
-    	// clear the percepts of the agents
-        clearPercepts("robota");
-        clearPercepts("stock");
-        //addPercept("robota", stock);
-        //addPercept("robota", hello);
-    	
-    	
-        Location lRobotA = model.getAgPos(0);
-        if (lRobotA.equals(model.lStock)) {
-//          addPercept("robota", stock);
-          }
-        
-        if (lRobotA.equals(model.lDelivery)) {
-          addPercept("robota", delivery1);
-        }
-        
-        if (lRobotA.equals(model.lAMachine)) {
-            addPercept("robota", machine1);
-          }
-        
-        //logger.info("***** Robota Percept After Update ******"+getPercepts(ag));
-        //robotLocation();
-    }
-    
+    }    
 
     @Override
     public boolean executeAction(String ag, Structure action) {
@@ -119,7 +90,6 @@ public class FactoryEnv extends Environment {
         int ordquant = 0;
         int ordID = 0;
         
-        //addPercept(Literal.parseLiteral("dirty"));
         // detecting action and calling the equivalant function from model
         if (afunctor.equals("move_towards")) {
         	String l = action.getTerm(0).toString();
@@ -189,7 +159,6 @@ public class FactoryEnv extends Environment {
 			}
 			
 			result = model.assembleBearingBoxes(ordquant);
-			logger.info("******** assembel_bearingboxes TEST INFO: " + result);
 			logger.info("******** assembel_bearingboxes TEST INFO: "+model.assembledBearingBox);
 			
 		} else if(afunctor.equals("clearb")) {
@@ -200,13 +169,11 @@ public class FactoryEnv extends Environment {
 		}
         
         if(result){
-        	//logger.info("Result is true "+result);
-        	updatePercepts(ag); // DO WE REALLY NEED THIS ???
+        	updatePercepts(ag);
         	try { Thread.sleep(500); } catch (Exception e) {}
         }
         return result;
 		
     }
-    
     
 }
