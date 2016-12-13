@@ -14,15 +14,13 @@ MAS smart_factory {
 
         stock;
 
-        robota;
+        robota #2;
 
         manager;
 
         bearingprovider;
 
         traystock;
-
-        robotb;
 
         delivery;
 
