@@ -11,5 +11,5 @@
 										   .send(stock, achieve, order(delivery, Otype, Oquant, OID)).
 
 +!order(Otype, Oquant, OID): Otype = 1 <- .print("New order for assembeled bearings"); 
-											.send(machine, achieve, order2(Otype, Oquant, OID)).
+											.send(machine, achieve, order(Otype, Oquant, OID)).
 //+!order(Otype, Oquant, OID): check validity
